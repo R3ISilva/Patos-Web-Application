@@ -3,7 +3,7 @@ using PrintService.Models.Print;
 
 namespace PrintService.Controllers;
 
-//[Route("[controller]")]
+[Route("[controller]")]
 [ApiController]
 public class PrintController : ControllerBase
 {
@@ -14,7 +14,7 @@ public class PrintController : ControllerBase
     }
     
     [HttpPost(Name = "Create")]
-    public IActionResult CreatePrint([FromBody] IPrint print)
+    public IActionResult CreatePrint([FromBody] Print print)
     {
         _printService.AddPrint(print);
         return new ObjectResult(print);
@@ -26,10 +26,10 @@ public class PrintController : ControllerBase
         return _printService.GetAllPrints();
     }
     
-    [HttpGet(Name = "Get/{id}")]
-    public IActionResult GetPrint(int id)
+    [HttpGet("Get/{id}", Name = "GetPrint")]
+    public IActionResult GetPrint([FromRoute] int id)
     {
-        IPrint print = _printService.GetPrint(id);
+        IPrint? print = _printService.GetPrint(id);
         if (print == null)
         {
             return NotFound();
@@ -51,7 +51,7 @@ public class PrintController : ControllerBase
     }
     
     [HttpDelete(Name = "Delete/{id}")]
-    public IActionResult DeletePrint(int id)
+    public IActionResult DeletePrint([FromRoute] int id)
     {
         _printService.DeletePrint(id);
         return new NoContentResult();
