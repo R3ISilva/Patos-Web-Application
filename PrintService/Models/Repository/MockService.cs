@@ -3,12 +3,13 @@ using PrintService.Models.Print;
 
 namespace PrintService.Models.Repository;
 
-public class RepositoryService : IRepositoryService
+public class MockService : IRepositoryService
 {
     private readonly List<IPrint> _prints = new List<IPrint>();
 
     public void AddPrint(IPrint print)
     {
+        print.Id = _prints.Count + 1;
         _prints.Add(print);
     }
     
@@ -21,11 +22,18 @@ public class RepositoryService : IRepositoryService
     {
         return _prints.FirstOrDefault(p => p.Id == id);
     }
-    
+        
     public IPrint UpdatePrint(IPrint print)
     {
         var index = _prints.FindIndex(p => p.Id == print.Id);
+        
+        if (index < 0)
+        {
+            return null;
+        } 
+        
         _prints[index] = print;
+        
         return print;
     }
 

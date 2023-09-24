@@ -4,8 +4,9 @@ namespace PrintService.Models.Balance;
 
 public class BalanceService : IBalanceService
 {
-    public Balance UpdateBalance(IPrint print)
+    public void UpdateBalance(IPrint print)
     {
+        return;
         throw new NotImplementedException();
     }
 }

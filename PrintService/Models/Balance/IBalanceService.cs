@@ -4,5 +4,5 @@ namespace PrintService.Models.Balance;
 
 public interface IBalanceService
 {
-    Balance UpdateBalance(IPrint print);
+    void UpdateBalance(IPrint print);
 }

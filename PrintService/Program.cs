@@ -1,6 +1,7 @@
 using PatosPrint;
 using PrintService.Models.Balance;
 using PrintService.Models.Print;
+using PrintService.Models.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,8 +12,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IBalanceService, BalanceService>(); // Register IBalanceService
+builder.Services.AddSingleton<IBalanceService, BalanceService>(); // Register IBalanceService
 builder.Services.AddScoped<IPrintService, PrintServiceWithBalance>(); //dependency injection? 
+builder.Services.AddSingleton<IRepositoryService, MockService>(); // Register IRepositoryService
 
 var app = builder.Build();
 

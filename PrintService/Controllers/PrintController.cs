@@ -39,7 +39,7 @@ public class PrintController : ControllerBase
     }
     
     [HttpPut(Name = "Update/{id}")]
-    public IActionResult UpdatePrint([FromBody] IPrint print)
+    public IActionResult UpdatePrint([FromBody] Print print)
     {
         IPrint? updatedPrint = _printService.UpdatePrint(print);
         
